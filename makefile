@@ -13,7 +13,7 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJ = bot.c io.c main.c spiel.c turnier.c
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-EXEC=./bin/tic_tac_toe.o
+EXEC=./bin/tic_tac_toe
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
