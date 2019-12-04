@@ -13,8 +13,8 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJ = bot.c io.c main.c spiel.c turnier.c
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-$(ODIR)/%.o: %.c $(DEPS)
+$(ODIR)/%: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 tic_tac_toe: $(OBJ)
-	$(CC) -o $@.o $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
