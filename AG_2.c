@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+void speichern_des_aktuellen_spielfeldes(int[3][3]);
+void laden_eines_spielfeldes(int[10][3][3], int);
+void eingabe_spieler(int, int, int);
+void loeschen_des_spielfeldes();
+int spiele_speicher[10][3][3]; //vorrat für 10 spiele
+int current_spiel[3][3]; //akutelles spiel
+int spiele_speicher_anzahl = 0; //wie viele spiele gespeichert wurden
+
+int main()
+{
+	
+		
+	return EXIT_SUCCESS;
+}
+
+void speichern_des_aktuellen_spielfeldes(feld int[3][3]) //abspeichern eines spielfeldes im array
+{
+	for(int zeile = 0; zeile < 3; zeile++)
+	{
+		for(int spalte = 0; spalte < 3; spalte++)
+		{
+			spiele_speicher[spiele_speicher_anzahl][zeile][spalte] = feld[zeile][spalte];
+		}
+	}
+	
+	spiele_speicher_anzahl++;
+}
+
+void laden_eines_spielfeldes(spiele_speicher int[10][3][3], int zu_ladende_spiel_nummer) //laden einer spielnummer
+{
+	for(int zeile = 0; zeile < 3; zeile++)
+	{
+		for(int spalte = 0; spalte < 3; spalte++)
+		{
+			current_spiel[zeile][spalte] = spiele_speicher[zu_ladende_spiel_nummer][zeile][spalte]; //hier current_spiel mit aktuellem spielspeicher austauschen
+		}
+	}
+}
+
+void eingabe_spieler(int echte_zeile, int echte_spalte, int eingabe)  		//   1   2   3  <--- spalten
+{																			//1  x / x / x
+	current_spiel[echte_zeile - 1][echte_spalte - 1] = eingabe;				//2	 x / x / x   	 Spielfeldnummern
+}																			//3  x / x / x		 current_spiel wieder mit aktuellem spielnamen auswechseln
+															 				//^
+															 				//| zeilen
+
+void loeschen_des_spielfeldes()
+{
+	for(int zeile = 0; zeile < 3; zeile++)
+	{
+		for(int spalte = 0; spalte < 3; spalte++)
+		{
+			current_spiel[zeile][spalte] = 0; //hier current_spiel mit aktuellem spielspeicher austauschen
+		}
+	} 
+}
+
+
+
+
+
+
