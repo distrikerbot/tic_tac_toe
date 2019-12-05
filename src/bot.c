@@ -10,9 +10,6 @@ int bot_random(spiel_t spiel)	{
 		move = rand() % 9;
 	} while( spiel.spielfeld[move%3][move/3] != leer );
 
-	printf("move %u\n", move);
-	scanf("%d");
-
 	return move;
 }
 
