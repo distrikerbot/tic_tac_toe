@@ -7,19 +7,19 @@
 #include <stdbool.h>
 #include <time.h>
 
-// Sleep für Windows und Mac
-#ifdef __APPLE__
+// Sleep für Windows und posix
+#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
     #include <unistd.h>
     #define Sleep(ms) usleep(ms * 1000)
-#elif _WIN32
+#elif defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
 #endif
 
-#define FELD_GROESSE 3
-// feld ist 3 * 3
+#define FELD_GROESSE 3 // Spielfeld ist 3x3
+#define MAX_SPIELE 10 // max Anzahl aller Spiele
 
-// Spielfeld Status
-typedef enum {
+// Status eines einzelnen Spielfeldes
+typedef enum Feld{
     leer,
     kreuz,
     kreis
@@ -29,13 +29,22 @@ typedef enum {
 typedef enum {
     gewonnen,
     verloren,
-    unentschieden
+    unentschieden,
+    unterwegs
 } ergebnis_t;
 
-// Struktur um das Turnier zu speichern
+// Ein Spiel mit Feld
 typedef struct {
-    //TODO
-    int temporary_damit_compiler_happy_ist;
+    feld_t spielfeld[FELD_GROESSE][FELD_GROESSE];
+    ergebnis_t ergebnis;
+    int  bot_schwierigkeit;
+} spiel_t;
+
+// speichert alle Spiele
+typedef struct {
+    spiel_t spiele[MAX_SPIELE];
+    int current_spiel;
+    int gesamt_spiele;
 } turnier_t;
 
 #endif

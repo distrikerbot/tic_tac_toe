@@ -2,16 +2,29 @@
 
 #include "../includes/spiel.h"
 
-void spiel_starten(feld_t spielfeld[FELD_GROESSE][FELD_GROESSE])
+spiel_t spiel_starten(spiel_t spiel)
 {
+    spiel.ergebnis = unterwegs;
+    spiel.bot_schwierigkeit = 1;
+
+    for(int i = 0; i < FELD_GROESSE; i++)  {
+        for(int j = 0; j < FELD_GROESSE; j++) {
+            spiel.spielfeld[i][j] = leer;
+        }
+    }
+    return spiel;
 }
 
-bool spiel_update(feld_t spielfeld[FELD_GROESSE][FELD_GROESSE])
+spiel_t spiel_update(spiel_t spiel)
 {
-    return false;
-}
+    int player_move = player_get_move();
+    int bot_move = bot_get_move(spiel);
 
-ergebnis_t get_spiel_ergebnis()
-{
-    return unentschieden;
+    // TODO
+    // daten im spielfeld basierend auf zügen der spieler handlen
+    // außerdem gewinn / unentschieden checken und setzen
+
+    print_spielfeld(spiel);
+
+    return spiel;
 }

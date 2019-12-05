@@ -2,11 +2,7 @@
 
 #include "../includes/bot.h"
 
-void set_schwierigkeit(int _s) {
-
-}
-
-int bot_get_move(feld_t spielfeld[FELD_GROESSE][FELD_GROESSE])
+int bot_get_move(spiel_t spiel)
 {
     return 0;
 }

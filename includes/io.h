@@ -6,7 +6,7 @@
 #include "./definitions.h"
 
 // druckt das momentane spielfeld
-void print_spielfeld(feld_t[FELD_GROESSE][FELD_GROESSE]);
+void print_spielfeld(spiel_t);
 
 // druckt, dass ergebnis eines spiels
 void print_ergebnis(ergebnis_t);

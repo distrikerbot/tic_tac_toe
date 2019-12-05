@@ -10,13 +10,10 @@
 ergebnis_t status;
 
 // initialisiert das Spielfeld und die Spieler
-void spiel_starten(feld_t[FELD_GROESSE][FELD_GROESSE]);
+spiel_t spiel_starten(spiel_t);
 
 // lässt eine Runde (Ein Zug pro Spieler) stattfinden
 // gibt true zurück, wenn spiel spiel noch läuft, false, wenn spiel beendet ist
-bool spiel_update(feld_t[FELD_GROESSE][FELD_GROESSE]);
-
-// gibt das Ergebnis zurück. NULL wenn Spiel noch läuft
-ergebnis_t get_spiel_ergebnis();
+spiel_t spiel_update(spiel_t);
 
 #endif

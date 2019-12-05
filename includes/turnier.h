@@ -5,8 +5,10 @@
 
 #include "./definitions.h"
 
-// TODO
-void turnier_starten();
-void turnier_update();
+// initialisiert ein turnier und dessen spiele
+turnier_t turnier_starten(turnier_t);
+
+// lässt ein spiel vollständig ablaufen
+turnier_t turnier_update(turnier_t);
 
 #endif
