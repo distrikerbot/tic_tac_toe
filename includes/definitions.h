@@ -27,10 +27,10 @@ typedef enum Feld{
 
 // Ergebnis eines Spiels
 typedef enum {
-    gewonnen,
-    verloren,
+    spieler_1_gewonnen,
+    spieler_2_gewonnen,
     unentschieden,
-    unterwegs
+    unterwegs // spiel ist in progress, noch nicht zu ende
 } ergebnis_t;
 
 // Ein Spiel mit Feld
@@ -38,6 +38,7 @@ typedef struct {
     feld_t spielfeld[FELD_GROESSE][FELD_GROESSE];
     ergebnis_t ergebnis;
     int  bot_schwierigkeit;
+	int spielzuege;
 } spiel_t;
 
 // speichert alle Spiele

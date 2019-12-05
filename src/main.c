@@ -6,7 +6,7 @@
 
 int main()  {
 
-    // srand(time(NULL));
+    srand(time(NULL));
 
     // TODO: get input für konfiguration
     // Anzahl Spiele (=turnier.gesamt_spiele) / Bot Schwierigkeit / ...

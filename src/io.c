@@ -62,7 +62,7 @@ void print_spielfeld(spiel_t spiel)
 
 }
 
-void print_ergebnis(ergebnis_t ergebnis)
+void print_ergebnis(spiel_t spiel)
 {
     clear_screen();
 
@@ -76,9 +76,13 @@ void print_turnier(turnier_t turnier)
     // TODO
 }
 
-int player_get_move()
+int player_get_move(spiel_t spiel)
 {
     // TODO
+	int move;
+	printf("Zug: ");
+	scanf("%u", &move);
+	// Checken ob eingegebener Zug möglich ist
 
-    return 0;
+    return move;
 }
