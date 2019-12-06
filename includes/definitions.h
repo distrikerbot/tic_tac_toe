@@ -19,6 +19,7 @@
 
 #define FELD_GROESSE 3 // Spielfeld ist 3x3
 #define MAX_SPIELE 10 // max Anzahl aller Spiele
+#define VERSION "v0.8"
 
 // Status eines einzelnen Spielfeldes
 typedef enum Feld{

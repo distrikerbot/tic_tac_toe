@@ -72,7 +72,7 @@ spiel_t spiel_update(spiel_t spiel)
     spiel.ergebnis = check_win(spiel);
     if(spiel.ergebnis != unterwegs) return spiel;
 
-    Sleep(500);
+    Sleep(200);
 
     int bot_move = bot_get_move(spiel);
     if(bot_move != -1)  {

@@ -16,6 +16,7 @@
 
 #define FELD_GROESSE 3 // Spielfeld ist 3x3
 #define MAX_SPIELE 10 // max Anzahl aller Spiele
+#define VERSION "v0.8"
 
 // Status eines einzelnen Spielfeldes
 typedef enum Feld{
@@ -63,23 +64,14 @@ void print_ergebnis(spiel_t);
 // druckt die ergebnisse / ablauf eines turniers
 void print_turnier(turnier_t);
 
-// fragt den spieler nach seinem zug
-int player_get_move(spiel_t);
-
-// wie system("cls") nur auf allen platformen
-void clear_screen();
-
-// druckt das momentane spielfeld
-void print_spielfeld(spiel_t);
-
-// druckt, dass ergebnis eines spiels
-void print_ergebnis(spiel_t);
-
-// druckt die ergebnisse / ablauf eines turniers
-void print_turnier(turnier_t);
+// druckt statistiken über das turnier
+void print_ende(turnier_t);
 
 // fragt den spieler nach seinem zug
 int player_get_move(spiel_t);
+
+// config für das gesamte spiel
+turnier_t get_config(turnier_t turnier);
 
 // initialisiert das Spielfeld und die Spieler
 spiel_t spiel_starten(spiel_t);
@@ -95,7 +87,6 @@ turnier_t turnier_starten(turnier_t);
 turnier_t turnier_update(turnier_t);
 
 // BOT
-
 
 bool feld_frei(spiel_t spiel)	{
 	int feld_frei = 0;
@@ -137,9 +128,7 @@ int bot_get_move(spiel_t spiel)
 	}
 }
 
-
 // IO
-
 
 void clear_screen() {
 	#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
@@ -227,17 +216,24 @@ void print_ergebnis(spiel_t spiel)
 	#elif defined(_WIN32) || defined(_WIN64)
 	system("pause");
 	#endif
-
-
 }
 
 void print_turnier(turnier_t turnier)
 {
-    //clear_screen();
-
 	printf("\nSpiel %i von %i!\n", ++turnier.current_spiel, ++turnier.gesamt_spiele);
+}
 
-    // TODO
+void print_ende(turnier_t turnier)
+{
+	int moves_gesamt = 0;
+	for(int i = 0; i <= turnier.gesamt_spiele; i++)	{
+		moves_gesamt += turnier.spiele[i].spielzuege;
+	}
+
+	printf("\n%i Spiel(e) in %i Zuegen beendet!\n\n", ++turnier.gesamt_spiele, moves_gesamt);
+
+	// TODO Statistik printen (wer gewann wie oft?)
+
 }
 
 int player_get_move(spiel_t spiel)
@@ -246,7 +242,7 @@ int player_get_move(spiel_t spiel)
 
 	while(true)	{
 		printf("Zug: ");
-		scanf("%u", &move);
+		scanf("%i", &move);
 
 		if(move > 0 && move < 10)	{
 			move--; // intern: 0-index, user: 1-index
@@ -265,8 +261,36 @@ int player_get_move(spiel_t spiel)
     return move;
 }
 
-// SPIEL
+turnier_t get_config(turnier_t turnier)	{
+	printf("\n\nTik-Tak-Toe (%s)\n\n", VERSION);
 
+	while(true)	{
+		printf("Anzahl der Spiele: ");
+		scanf("%i", &turnier.gesamt_spiele);
+		if(turnier.gesamt_spiele > 0 && turnier.gesamt_spiele < MAX_SPIELE)	{
+			break;
+		}	else 	{
+			printf("Ungültige Anzahl an Spielen (%i)\n", turnier.gesamt_spiele);
+		}
+	}
+
+	int dif = 0;
+	while(true)	{
+		printf("Bot Schwierigkeit (0,1): ");
+		scanf("%i", &dif);
+		if(dif > 0 && dif <= 1)	{
+			for(int i = 0; i < turnier.gesamt_spiele; i++)	{
+				turnier.spiele[i].bot_schwierigkeit = dif;
+			}
+			break;
+		}	else 	{
+			printf("Ungültige Schwierigkeit (%i)\n", dif);
+		}
+	}
+	return turnier;
+}
+
+// SPIEL
 
 ergebnis_t check_win(spiel_t spiel)
 {
@@ -338,7 +362,7 @@ spiel_t spiel_update(spiel_t spiel)
     spiel.ergebnis = check_win(spiel);
     if(spiel.ergebnis != unterwegs) return spiel;
 
-    Sleep(500);
+    Sleep(200);
 
     int bot_move = bot_get_move(spiel);
     if(bot_move != -1)  {
@@ -354,6 +378,7 @@ spiel_t spiel_update(spiel_t spiel)
 
     return spiel;
 }
+
 
 // TURNIER
 
@@ -383,7 +408,6 @@ turnier_t turnier_update(turnier_t turnier)   {
 
 // MAIN
 
-
 int main()  {
 
     srand(time(NULL));
@@ -393,8 +417,9 @@ int main()  {
 
     turnier_t turnier = {};
 
-    turnier.gesamt_spiele = 1; // 0-indexed
+    turnier.gesamt_spiele = 0; // 0-indexed
     turnier = turnier_starten(turnier);
+    turnier = get_config(turnier);
 
     while(true)    {
         clear_screen();
@@ -404,7 +429,7 @@ int main()  {
 
         if(turnier.current_spiel > turnier.gesamt_spiele)   {
             // Alle Spiele fertig
-            printf("\nAlle Spiele Fertig\n\n");
+            print_ende(turnier);
             break;
         }
     }

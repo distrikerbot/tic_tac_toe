@@ -17,7 +17,13 @@ void print_ergebnis(spiel_t);
 // druckt die ergebnisse / ablauf eines turniers
 void print_turnier(turnier_t);
 
+// druckt statistiken über das turnier
+void print_ende(turnier_t);
+
 // fragt den spieler nach seinem zug
 int player_get_move(spiel_t);
+
+// config für das gesamte spiel
+turnier_t get_config(turnier_t turnier);
 
 #endif

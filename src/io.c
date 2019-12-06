@@ -88,17 +88,24 @@ void print_ergebnis(spiel_t spiel)
 	#elif defined(_WIN32) || defined(_WIN64)
 	system("pause");
 	#endif
-
-
 }
 
 void print_turnier(turnier_t turnier)
 {
-    //clear_screen();
-
 	printf("\nSpiel %i von %i!\n", ++turnier.current_spiel, ++turnier.gesamt_spiele);
+}
 
-    // TODO
+void print_ende(turnier_t turnier)
+{
+	int moves_gesamt = 0;
+	for(int i = 0; i <= turnier.gesamt_spiele; i++)	{
+		moves_gesamt += turnier.spiele[i].spielzuege;
+	}
+
+	printf("\n%i Spiel(e) in %i Zuegen beendet!\n\n", ++turnier.gesamt_spiele, moves_gesamt);
+
+	// TODO Statistik printen (wer gewann wie oft?)
+
 }
 
 int player_get_move(spiel_t spiel)
@@ -107,7 +114,7 @@ int player_get_move(spiel_t spiel)
 
 	while(true)	{
 		printf("Zug: ");
-		scanf("%u", &move);
+		scanf("%i", &move);
 
 		if(move > 0 && move < 10)	{
 			move--; // intern: 0-index, user: 1-index
@@ -124,4 +131,34 @@ int player_get_move(spiel_t spiel)
 	}
 
     return move;
+}
+
+turnier_t get_config(turnier_t turnier)	{
+	printf("\n\nTik-Tak-Toe (%s)\n\n", VERSION);
+
+	while(true)	{
+		printf("Anzahl der Spiele: ");
+		scanf("%i", &turnier.gesamt_spiele);
+		if(turnier.gesamt_spiele > 0 && turnier.gesamt_spiele < MAX_SPIELE)	{
+			break;
+		}	else 	{
+			printf("Ungültige Anzahl an Spielen (%i)\n", turnier.gesamt_spiele);
+		}
+	}
+
+	int dif = 0;
+	while(true)	{
+		printf("Bot Schwierigkeit (0,1): ");
+		scanf("%i", &dif);
+		if(dif > 0 && dif <= 1)	{
+			for(int i = 0; i < turnier.gesamt_spiele; i++)	{
+				turnier.spiele[i].bot_schwierigkeit = dif;
+			}
+			break;
+		}	else 	{
+			printf("Ungültige Schwierigkeit (%i)\n", dif);
+		}
+	}
+
+	return turnier;
 }

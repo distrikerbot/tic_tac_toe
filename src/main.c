@@ -13,8 +13,9 @@ int main()  {
 
     turnier_t turnier = {};
 
-    turnier.gesamt_spiele = 1; // 0-indexed
+    turnier.gesamt_spiele = 0; // 0-indexed
     turnier = turnier_starten(turnier);
+    turnier = get_config(turnier);
 
     while(true)    {
         clear_screen();
@@ -24,7 +25,7 @@ int main()  {
 
         if(turnier.current_spiel > turnier.gesamt_spiele)   {
             // Alle Spiele fertig
-            printf("\nAlle Spiele Fertig\n\n");
+            print_ende(turnier);
             break;
         }
     }
