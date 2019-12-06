@@ -15,6 +15,6 @@ void print_ergebnis(spiel_t);
 void print_turnier(turnier_t);
 
 // fragt den spieler nach seinem zug
-int player_get_move();
+int player_get_move(spiel_t);
 
 #endif

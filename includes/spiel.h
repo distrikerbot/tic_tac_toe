@@ -7,8 +7,6 @@
 #include "./io.h"
 #include "./bot.h"
 
-ergebnis_t status;
-
 // initialisiert das Spielfeld und die Spieler
 spiel_t spiel_starten(spiel_t);
 

@@ -11,7 +11,7 @@ int main()  {
     // TODO: get input für konfiguration
     // Anzahl Spiele (=turnier.gesamt_spiele) / Bot Schwierigkeit / ...
 
-    turnier_t turnier;
+    turnier_t turnier = {};
 
     turnier.gesamt_spiele = 5;
     turnier = turnier_starten(turnier);

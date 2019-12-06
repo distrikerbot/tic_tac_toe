@@ -1,3 +1,5 @@
+// degfinitions.h includes und struct/enum type deifnitions
+
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
