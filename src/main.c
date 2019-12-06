@@ -13,17 +13,18 @@ int main()  {
 
     turnier_t turnier = {};
 
-    turnier.gesamt_spiele = 5;
+    turnier.gesamt_spiele = 1; // 0-indexed
     turnier = turnier_starten(turnier);
 
     while(true)    {
+        clear_screen();
         print_turnier(turnier);
 
         turnier = turnier_update(turnier);
 
-        Sleep(500); // temporary
         if(turnier.current_spiel > turnier.gesamt_spiele)   {
             // Alle Spiele fertig
+            printf("\nAlle Spiele Fertig\n\n");
             break;
         }
     }

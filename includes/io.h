@@ -5,6 +5,9 @@
 
 #include "./definitions.h"
 
+// wie system("cls") nur auf allen platformen
+void clear_screen();
+
 // druckt das momentane spielfeld
 void print_spielfeld(spiel_t);
 
