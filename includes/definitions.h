@@ -29,8 +29,8 @@ typedef enum Feld{
 
 // Ergebnis eines Spiels
 typedef enum {
-    spieler_1_gewonnen,
-    spieler_2_gewonnen,
+    kreuz_gewonnen,
+    kreis_gewonnen,
     unentschieden,
     unterwegs // spiel ist in progress, noch nicht zu ende
 } ergebnis_t;

@@ -7,7 +7,7 @@ void clear_screen() { system("@cls||clear"); }
 
 void print_spielfeld(spiel_t spiel)
 {
-    clear_screen();
+	clear_screen();
 
 	int feld_zeile = 0;
 	int feld_spalte = 0;
@@ -48,7 +48,7 @@ void print_spielfeld(spiel_t spiel)
 					feld_spalte++;
 					printf(" %c ", temp);
 				}
-				
+
 				if(spalten == 5)
 				{
 					feld_zeile++;
@@ -64,7 +64,7 @@ void print_spielfeld(spiel_t spiel)
 
 void print_ergebnis(spiel_t spiel)
 {
-    clear_screen();
+	printf("\n\nSpiel Zuende mit Code %u\n", spiel.ergebnis);
 
     // TODO
 }
@@ -81,8 +81,17 @@ int player_get_move(spiel_t spiel)
     // TODO
 	int move;
 	printf("Zug: ");
-	scanf("%u", &move);
-	// Checken ob eingegebener Zug möglich ist
+
+	while(true)	{
+		scanf("%u", &move);
+
+		if( spiel.spielfeld[move/3][move%3] == leer )	{
+			break;
+		}	else	{
+			printf("Feld %u besetzt.", move);
+			continue;
+		}
+	}
 
     return move;
 }
