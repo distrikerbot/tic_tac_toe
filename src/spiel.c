@@ -10,20 +10,24 @@ ergebnis_t check_win(spiel_t spiel)
     {
         if (spiel.spielfeld[i][0] == spiel.spielfeld[i][1] && spiel.spielfeld[i][0] == spiel.spielfeld[i][2] && spiel.spielfeld[i][0] != leer)
         {
+            printf("A\n");
             return spiel.spielfeld[i][0] == kreuz ? kreuz_gewonnen : kreis_gewonnen;
         }
-        else if (spiel.spielfeld[0][i] == spiel.spielfeld[1][i] && spiel.spielfeld[0][i] == spiel.spielfeld[2][i] && spiel.spielfeld[i][0] != leer)
+        else if (spiel.spielfeld[0][i] == spiel.spielfeld[1][i] && spiel.spielfeld[0][i] == spiel.spielfeld[2][i] && spiel.spielfeld[0][i] != leer)
         {
+            printf("B\n");
             return spiel.spielfeld[0][i] == kreuz ? kreuz_gewonnen : kreis_gewonnen;
         }
-        else if (spiel.spielfeld[0][0] == spiel.spielfeld[1][1] && spiel.spielfeld[0][0] == spiel.spielfeld[2][2] && spiel.spielfeld[0][0] != leer)
-        {
-            return spiel.spielfeld[0][0] == kreuz ? kreuz_gewonnen : kreis_gewonnen;
-        }
-        else if (spiel.spielfeld[0][2] == spiel.spielfeld[1][1] && spiel.spielfeld[0][2] == spiel.spielfeld[2][0] && spiel.spielfeld[0][2] != leer)
-        {
-            return spiel.spielfeld[0][2] == kreuz ? kreuz_gewonnen : kreis_gewonnen;
-        }
+    }
+     if (spiel.spielfeld[0][0] == spiel.spielfeld[1][1] && spiel.spielfeld[0][0] == spiel.spielfeld[2][2] && spiel.spielfeld[0][0] != leer)
+    {
+        printf("C\n");
+        return spiel.spielfeld[0][0] == kreuz ? kreuz_gewonnen : kreis_gewonnen;
+    }
+    else if (spiel.spielfeld[0][2] == spiel.spielfeld[1][1] && spiel.spielfeld[0][2] == spiel.spielfeld[2][0] && spiel.spielfeld[0][2] != leer)
+    {
+        printf("D\n");
+        return spiel.spielfeld[0][2] == kreuz ? kreuz_gewonnen : kreis_gewonnen;
     }
 
     for (int i = 0; i < FELD_GROESSE * FELD_GROESSE; i++)
